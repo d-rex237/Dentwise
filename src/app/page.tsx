@@ -1,18 +1,22 @@
 "use client";
-import { SignedIn, SignedOut, SignOutButton } from "@clerk/clerk-react";
-import { SignUpButton } from "@clerk/nextjs";
+import CTA from "@/components/landing/CTA";
+import Footer from "@/components/landing/Footer";
+import Header from "@/components/landing/Header";
+import Hero from "@/components/landing/Hero";
+import HowItWorks from "@/components/landing/HowItWorks";
+import PricingSection from "@/components/landing/PricingSection";
+import WhatToAsk from "@/components/landing/WhatToAsk";
 
 export default function Home() {
   return (
-    <div>
-      <h1>Home Page</h1>
-      <SignedOut>
-        <SignUpButton mode="modal">Sign Up</SignUpButton>
-      </SignedOut>
-
-      <SignedIn>
-        <SignOutButton>LogOut</SignOutButton>
-      </SignedIn>
+    <div className="min-h-screen bg-background">
+      <Header />
+      <Hero />
+      <HowItWorks />
+      <WhatToAsk />
+      <PricingSection />
+      <CTA />
+      <Footer />
     </div>
   );
 }
