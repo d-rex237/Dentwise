@@ -3,6 +3,7 @@ import {
   bookAppointment,
   getAppointments,
   getBookedTimeSlots,
+  updateAppointmentStatus,
 } from "@/lib/actions/Appointments";
 import {
   useMutation,
@@ -46,4 +47,17 @@ export function useUserAppointments() {
     queryFn: getAppointments,
   });
   return result;
+}
+
+export function useUpdateAppointmentStatus() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: updateAppointmentStatus,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["getAppointment"] });
+    },
+    onError: (error) =>
+      console.error("Failed to update appointment status", error),
+  });
 }
