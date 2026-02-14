@@ -111,3 +111,24 @@ export async function updateDoctor(input: UpdateDoctorInput) {
     throw new Error("Could not update doctor");
   }
 }
+
+export async function getAvailableDoctors() {
+  try {
+    const doctors = await prisma.doctor.findMany({
+      where: { Isactive: true },
+      include: {
+        _count: {
+          select: { appointments: true },
+        },
+      },
+      orderBy: { name: "asc" },
+    });
+
+    return doctors.map((doctor) => ({
+      ...doctor,
+      appointmentCount: doctor._count.appointments,
+    }));
+  } catch (error) {
+    console.error("Error fetching available doctors:", error);
+  }
+}

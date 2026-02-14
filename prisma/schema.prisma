@@ -43,7 +43,7 @@ model Appointment {
   date      DateTime
   time      String
   duration  Int               @default(30)
-  status    appointmentStatus @default(COMPLETED)
+  status    appointmentStatus @default(COMPLETED )
   notes     String?
   reason    String?
   createdAt DateTime          @default(now())
@@ -64,6 +64,7 @@ enum gender {
 
 enum appointmentStatus {
   SCHEDULED
+  CONFIRMED
   COMPLETED
   CANCELED
   NO_SHOW
